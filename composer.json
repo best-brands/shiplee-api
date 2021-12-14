@@ -1,0 +1,28 @@
+{
+    "name": "best-brands/shiplee-api",
+    "type": "library",
+    "description": "A PHP Client for the Shiplee dashboard with async support",
+    "keywords": [
+        "shiplee"
+    ],
+    "homepage": "https://github.com/best-brands/shiplee-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Harm Smits",
+            "email": "harmsmitsdev@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "~7",
+        "symfony/dom-crawler": "^5.4",
+        "symfony/css-selector": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "BestBrands\\Shiplee\\": "src/"
+        }
+    }
+}
