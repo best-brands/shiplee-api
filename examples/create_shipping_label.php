@@ -29,5 +29,5 @@ $client->post('zendingen/nieuw', [
         'delivery_date'           => '', /* required:     the delivery date, format d-m-Y */
         'submit'                  => 'Verzenden',
     ],
-    'shiplee_requires_csrf'     => true,
+    'shiplee_requires_csrf'     => true, /* required: indicates CSRF token is required in the form parameters */
 ]);
