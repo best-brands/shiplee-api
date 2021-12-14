@@ -3,12 +3,12 @@
 use BestBrands\Shiplee\Client;
 use GuzzleHttp\RequestOptions;
 
-require dirname(__FILE__) . '/vendor/autoload.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client('YOUR EMAIL', 'YOUR PASSWORD');
 $client->authenticate();
 
-$client->post('zendingen/nieuw', [
+$response = $client->post('zendingen/nieuw', [
     RequestOptions::FORM_PARAMS => [
         'product'                 => '', /* required:     @see \BestBrands\Shiplee\Enum */
         'sender_name'             => '', /* required:     the sender name */
@@ -31,3 +31,17 @@ $client->post('zendingen/nieuw', [
     ],
     'shiplee_requires_csrf'     => true, /* required: indicates CSRF token is required in the form parameters */
 ]);
+
+$parcel_id = null;
+$location = $response->getHeader('X-Guzzle-Redirect-History');
+
+if (!empty($location)) {
+    [$location] = $location;
+
+    if (strpos($location, '/zendingen/') !== false) {
+        $parts = explode('/', $location);
+        $parcel_id = $parts[array_key_last($parts)];
+    }
+}
+
+echo 'We should have a parcel ID on success: ' . $parcel_id . PHP_EOL;

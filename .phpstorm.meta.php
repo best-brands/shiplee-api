@@ -6,6 +6,7 @@ namespace PHPSTORM_META {
         'zendingen/{shipment_uuid}/label/pdf',
         'zendingen/{shipment_uuid}/label/zpl',
         'zendingen/{shipment_uuid}/label/png',
+        'zendingen/{shipment_uuid}/annuleren'
     );
 
     registerArgumentsSet(

@@ -49,9 +49,13 @@ class Client
         $this->jar = new CookieJar();
 
         $this->client = new \GuzzleHttp\Client([
-            'handler'  => $stack,
-            'base_uri' => self::ENDPOINT_URL,
-            'cookies'  => $this->jar,
+            'handler'         => $stack,
+            'base_uri'        => self::ENDPOINT_URL,
+            'cookies'         => $this->jar,
+            'allow_redirects' => [
+                'max'             => 5,
+                'track_redirects' => true,
+            ],
         ]);
     }
 

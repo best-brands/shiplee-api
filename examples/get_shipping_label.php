@@ -2,11 +2,16 @@
 
 use BestBrands\Shiplee\Client;
 
-require dirname(__FILE__) . '/vendor/autoload.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
 
 $client = new Client('YOUR EMAIL', 'YOUR PASSWORD');
 $client->authenticate();
 
-$pdf = (string)$client->get('zendingen/{YOUR SHIPMENT UUID}/label/pdf')->getBody();
+$response = $client->get('zendingen/{YOUR SHIPMENT UUID}/label/pdf');
 
-file_put_contents('shipment.pdf', $pdf);
+if (empty($response->getHeader('X-Guzzle-Redirect-History'))) {
+    // Successfully created.
+    file_put_contents('shipment.pdf', (string) $response->getBody());
+} else {
+    echo 'unable to find shipment';
+}
